@@ -204,10 +204,49 @@ router.put(
       res.json(profile);
     } catch (err) {
       console.error(err.message);
-      res.status(500).send("Send Error");
+      res.status(500).send("Server Error");
     }
   }
 );
+
+// @route     POST api/profile/experience/:exp_id
+// @desc      Update profile experience
+// @access    Private
+router.post("/experience/:exp_id", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+    if (profile) {
+      const experienceIndex = await profile.experience.findIndex(
+        (obj) => obj.id === req.params.exp_id
+      );
+
+      if (experienceIndex === -1) {
+        return res
+          .status(400)
+          .json({ msg: "There is no profile for this user" });
+      }
+
+      const { title, company, location, from, to, current, description } =
+        req.body;
+
+      if (title) profile.experience[experienceIndex].title = title;
+      if (company) profile.experience[experienceIndex].company = company;
+      if (location) profile.experience[experienceIndex].location = location;
+      if (from) profile.experience[experienceIndex].from = from;
+      if (to) profile.experience[experienceIndex].to = to;
+      if (current) profile.experience[experienceIndex].current = current;
+      if (description) {
+        profile.experience[experienceIndex].description = description;
+      }
+
+      await profile.save();
+      res.json(profile);
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 // @route     DELETE api/profile/experience/:exp_id
 // @desc      Delete experience from profile
@@ -228,7 +267,7 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
     res.json(profile);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Send Error");
+    res.status(500).send("Server Error");
   }
 });
 
