@@ -233,8 +233,14 @@ router.post("/experience/:exp_id", auth, async (req, res) => {
       if (company) profile.experience[experienceIndex].company = company;
       if (location) profile.experience[experienceIndex].location = location;
       if (from) profile.experience[experienceIndex].from = from;
-      if (to) profile.experience[experienceIndex].to = to;
-      if (current) profile.experience[experienceIndex].current = current;
+      if (to) {
+        profile.experience[experienceIndex].current = false;
+        profile.experience[experienceIndex].to = to;
+      }
+      if (current) {
+        profile.experience[experienceIndex].current = current;
+        profile.experience[experienceIndex].to = null;
+      }
       if (description) {
         profile.experience[experienceIndex].description = description;
       }
