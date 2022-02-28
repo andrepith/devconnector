@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import PrivateRoute from "./components/routing/PrivateRoute";
+// Pages
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Login from "./components/auth/Login";
@@ -9,6 +10,7 @@ import Register from "./components/auth/Register";
 import Alert from "./components/layout/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/profile-forms/CreateProfile";
+import EditProfile from "./components/profile-forms/EditProfile";
 // Redux
 import store from "./store";
 import { loadUser } from "./actions/auth";
@@ -30,15 +32,19 @@ const App = () => {
         <Alert />
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="register" element={<Register />} />
-          <Route path="login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
           <Route
-            path="dashboard"
+            path="/dashboard"
             element={<PrivateRoute component={Dashboard} />}
           />
           <Route
-            path="create-profile"
+            path="/create-profile"
             element={<PrivateRoute component={CreateProfile} />}
+          />
+          <Route
+            path="/edit-profile"
+            element={<PrivateRoute component={EditProfile} />}
           />
         </Routes>
       </Router>
