@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import { getCurrentProfile } from "../../actions/profile";
 import DashboardAction from "./DashboardAction";
 import Spinner from "../layout/Spinner";
+import Experience from "./Experience";
+import Education from "./Education";
 
 const Dashboard = ({
   getCurrentProfile,
@@ -26,7 +28,11 @@ const Dashboard = ({
             <i className="fas fa-user"> Welcome {user && user.name}</i>
           </p>
           {!!profile ? (
-            <DashboardAction />
+            <>
+              <DashboardAction />
+              <Experience experience={profile.experience} />
+              <Education education={profile.education} />
+            </>
           ) : (
             <>
               <p>You have not yet setup a profile, please add some info</p>
