@@ -17,6 +17,7 @@ import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
 import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
+import NotFound from "./components/layout/NotFound";
 // Redux
 import store from "./store";
 import { loadUser } from "./actions/auth";
@@ -67,6 +68,7 @@ const App = () => {
             path="/posts/:id"
             element={<PrivateRoute component={Post} />}
           />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </Router>
     </Provider>
