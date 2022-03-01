@@ -12,13 +12,13 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
   return loading ? (
     <Spinner />
   ) : (
-    <section class="container">
-      <h1 class="large text-primary">Posts</h1>
-      <p class="lead">
-        <i class="fas fa-user"></i> Welcome to the community!
+    <section className="container">
+      <h1 className="large text-primary">Posts</h1>
+      <p className="lead">
+        <i className="fas fa-user"></i> Welcome to the community!
       </p>
       {/* PostForm */}
-      <div class="posts">
+      <div className="posts">
         {posts.map((post) => (
           <PostItem key={post._id} post={post} />
         ))}
